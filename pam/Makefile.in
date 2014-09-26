@@ -320,7 +320,7 @@ lib_LTLIBRARIES = pam_latch.la
 pam_latch_la_SOURCES = pam_latch.c ../lib/latch.c ../lib/latch.h ../lib/util.c ../lib/util.h
 pam_latch_la_LDFLAGS = -module -avoid-version
 test_SOURCES = test.c
-pam_latch_LIBS = @LIBS@ -lpam -lcurl -lcrypto -lssl -ldl
+pam_latch_LIBS = @LIBS@ -lpam -lcurl -lcrypto -lssl
 test_LIBS = @LIBS@ @linux_test_LIBS@ -lpam
 all: all-am
 

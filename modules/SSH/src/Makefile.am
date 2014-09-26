@@ -1,7 +1,7 @@
 AUTOMAKE_OPTIONS = no-dependencies
 DEFS =
 
-LIBS = @LIBS@ -lcurl -lcrypto -lssl -ldl
+LIBS = @LIBS@ -lcurl -lcrypto -lssl
 
 bin_PROGRAMS = latch-shell
 latch_shell_SOURCES = 	latch_shell.c \

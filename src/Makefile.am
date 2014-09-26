@@ -1,7 +1,7 @@
 AUTOMAKE_OPTIONS = no-dependencies
 DEFS =
 
-LIBS = @LIBS@ -lcurl -lcrypto -lssl -ldl
+LIBS = @LIBS@ -lcurl -lcrypto -lssl
 
 bin_PROGRAMS = latch
 latch_SOURCES = latch_unix.c latch_unix.h ../lib/latch.c ../lib/latch.h ../lib/util.c ../lib/util.h ../lib/charset.c ../lib/charset.h

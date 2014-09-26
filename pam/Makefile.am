@@ -12,7 +12,7 @@ pam_latch_la_LDFLAGS = -module -avoid-version
 bin_PROGRAMS = test
 test_SOURCES = test.c
 
-pam_latch_LIBS = @LIBS@ -lpam -lcurl -lcrypto -lssl -ldl
+pam_latch_LIBS = @LIBS@ -lpam -lcurl -lcrypto -lssl
 
 test_LIBS = @LIBS@ @linux_test_LIBS@ -lpam
 
