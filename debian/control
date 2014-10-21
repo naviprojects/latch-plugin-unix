@@ -1,0 +1,27 @@
+Source: latch
+Section: misc
+Priority: extra
+Maintainer: Ivan Martin <ivan.martin@11paths.com>
+Build-Depends: debhelper (>= 9), autotools-dev, libcurl4-openssl-dev, libpam-dev
+Standards-Version: 3.9.4
+Homepage: https://latch.elevenpaths.com/
+
+Package: latch
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: command for pairing system with Latch
+ This allows system users to pair and unpair their accounts with Latch, and 
+ also check their status with Latch Servers.
+
+Package: pam-latch
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: PAM module for Latch
+ This provides the PAM module needed to interact with Latch Servers.
+
+Package: latch-ssh-command
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: latch command for integration with ssh 
+ This allows users to integrate latch into authorized keys file
+ for protecting rsa/dsa keys with Latch. 

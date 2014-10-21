@@ -1,0 +1,75 @@
+#!/bin/sh
+
+set -e
+
+
+
+
+set_conffile ()
+{
+
+sudo echo "
+#    
+# Configuration file for the latch UNIX plugin
+#
+
+# Identify your Application
+# Application ID value
+#
+app_id = REPLACE_APP_ID_HERE
+
+# Secret key value 
+#
+secret_key = REPLACE_SECRET_KEY_HERE
+
+# Latch host value
+#
+latch_host = https://latch.elevenpaths.com
+
+#
+# Default action when latch is not available
+# Options: open, close
+action = open
+
+# Set timeout value
+timeout = 8
+
+# Operations
+sshd-login = REPLACE_OPERATION_ID_HERE
+sshd-keys = REPLACE_OPERATION_ID_HERE
+login = REPLACE_OPERATION_ID_HERE
+sudo = REPLACE_OPERATION_ID_HERE
+su = REPLACE_OPERATION_ID_HERE" > $1 
+
+}
+
+
+
+# setUserId latch binary
+echo    "#### Setting SUID for latch ####"
+ls -l /usr/bin/latch
+sudo chmod 4755 /usr/bin/latch
+ls -l /usr/bin/latch
+echo    "####-------------------------------####"
+
+# install latch config files
+[ -d /etc/latch ] || sudo mkdir /etc/latch
+if [ ! -f /etc/latch/latch.conf ]; then
+    set_conffile /etc/latch/latch.conf
+    echo "Created /etc/latch/latch.conf"
+    echo "Please edit it to add your Application Id and your Secret Key"
+else
+    echo "Found existing /etc/latch/latch.conf - updating permissions"
+fi
+chmod 600 /etc/latch/latch.conf
+if [ ! -f /etc/latch/latch.accounts ]; then
+    sudo touch /etc/latch/latch.accounts
+    echo "Created /etc/latch/latch.accounts"
+else
+    echo "Found existing /etc/latch/latch.accounts - updating permissions"
+fi
+sudo chmod 600 /etc/latch/latch.accounts
+
+#DEBHELPER#
+
+exit 0

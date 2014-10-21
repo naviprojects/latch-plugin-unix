@@ -1,0 +1,5 @@
+latch (1.x-0ubuntu1) trusty; urgency=low
+
+  * Initial release
+
+ -- Ivan Martin <ivan.martin@11paths.com>  Fri, 03 Oct 2014 12:58:56 +0200

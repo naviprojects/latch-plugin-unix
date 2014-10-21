@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+
+if [ -d /etc/latch ]; then
+	echo "Removing latch conf directory..."
+	sudo rm -R /etc/latch
+fi
+
+#DEBHELPER#
+
+exit 0
