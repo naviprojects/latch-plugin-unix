@@ -1,4 +1,4 @@
-Source: latch
+Source: latch-unix
 Section: misc
 Priority: extra
 Maintainer: Ivan Martin <ivan.martin@11paths.com>

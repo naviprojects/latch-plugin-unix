@@ -1,4 +1,4 @@
-latch (1.1-0ubuntu1) trusty; urgency=low
+latch-unix (1.1-0ubuntu1) trusty; urgency=low
 
   * Initial release
 
