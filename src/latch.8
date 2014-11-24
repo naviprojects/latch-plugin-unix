@@ -1,0 +1,82 @@
+.Dd November 19, 2014
+.Dt LATCH 8
+.Os
+.Sh NAME
+.Nm latch
+.Nd the safety switch for your digital life
+.Sh SYNOPSIS
+.Sh DESCRIPTION
+.Nm
+Command for pairing system with Latch.
+.Pp
+This allows system users to pair and unpair their accounts with Latch, and 
+also check their status with Latch Servers.
+.Pp
+Usage: latch -p PAIRING_CODE [Options]
+       latch -s [Options]
+       latch -o OPERATION [Options]
+       latch -u [Options]
+
+       -p PAIRING_CODE,         pair user with Latch servers
+       -s,                      check latch status with Latch servers
+       -o OPERATION,            check OPERATION status with Latch servers
+       -u,                      unpair user from Latch servers
+.Pp
+       -v,                      version
+       -h,                      help
+.Pp
+.Pp
+Options:
+       -f CONFIG_FILE,          get configuration parameters from CONFIG_FILE;
+                                by default use /etc/latch/latch.conf
+       -a ACCOUNTS_FILE,        put and get accounts information from ACCOUNTS_FILE;
+                                by default use /etc/latch/latch.accounts
+.Pp
+.Sh CONFIGURATION
+The latch configuration file must have the following options:
+.Pp
+.It Cm app_id
+Latch application id (required).
+.It Cm secret_key
+Latch secret key (required).
+.It Cm latch host.
+.It Cm timeout.
+.It Cm operations.
+.It Cm action
+Specifies the action to be performed in case there is no connection to Latch servers
+(that may be 
+.Dq open
+/
+.Dq close
+).
+.El
+.Pp
+An example configuration file:
+.Bd -literal -offset 8n
+app_id = SI9F...53RI
+secret_key = 4MjR...Q2NmRiM2Q1Y
+action = open
+latch_host = https://latch.elevenpaths.com
+.Ed
+.Pp
+If installed setuid root (the default), 
+.Nm
+performs Latch dedicated privilege separation user,
+requiring that the configuration file be owned and readable only by
+this user.
+.Sh EXAMPLES
+.Nm
+latch -p Fm4Mgx
+.Sh FILES
+.Bl -tag -width ".Cm failmode"
+.It Pa /etc/latch/latch.conf
+Default configuration file path
+.It Pa /etc/latch/latch.accounts
+Default accounts file path
+.El
+.Sh AUTHORS
+.Nm
+was written by 
+.An "Eleven Paths" Aq latch-help@support.elevenpaths.com
+.Sh NOTES
+Something
