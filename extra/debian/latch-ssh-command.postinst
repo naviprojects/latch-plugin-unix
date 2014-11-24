@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+
+echo    "#### Setting SUID for latch-ssh-cmd ####"
+ls -l /usr/bin/latch-ssh-cmd
+sudo chmod 4755 /usr/bin/latch-ssh-cmd
+ls -l /usr/bin/latch-ssh-cmd
+echo    "####-------------------------------####"
+
+
+#DEBHELPER#
+
+exit 0

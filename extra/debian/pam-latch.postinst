@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+
+# move pam_latch.so to PAM directory
+PAM_DIR=null
+test -d /lib*/*/security/ && PAM_DIR=/lib*/*/security/
+test -d $PAM_DIR || PAM_DIR=/lib*/security/
+test -d $PAM_DIR || PAM_DIR=/usr/lib/pam/
+test -d $PAM_DIR || PAM_DIR=/usr/lib/security/
+
+if test -d $PAM_DIR ; then
+    echo "Moving pam_latch.so to $PAM_DIR ..." 
+    sudo mv /usr/lib/pam_latch.so $PAM_DIR
+else
+    echo 'Move /usr/lib/pam_latch.so manually to PAM dir'
+fi
+
+
+#DEBHELPER#
+
+exit 0
