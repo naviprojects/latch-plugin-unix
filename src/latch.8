@@ -1,4 +1,4 @@
-.TH LATCH 8 "December 30, 2014" "1.1" "System Management Commands"
+.TH LATCH 8 "January 20, 2015" "1.1" "System Management Commands"
 .
 .
 .SH "NAME"
@@ -73,17 +73,18 @@ The latch configuration file must have the following options:
 .PP
 \fBapp_id\fR 
 .RS 4
-Latch application id. (required)
+Indicate the Latch application id. (required)
 .RE
 .PP
 \fBsecret_key\fR 
 .RS 4
-Latch secret key. (required)
+Indicate the Latch secret key. (required)
 .RE
 .PP
 \fBlatch host\fR
 .RS 4
-Latch host.
+Indicate the Latch host.
+The default is https://latch.elevenpaths.com/.
 .RE
 .PP
 \fBaction\fR
@@ -99,6 +100,11 @@ Period of time that will be waiting for Latch response before taking the specifi
 The default is 2.
 .RE
 .PP
+\fB<OPERATION>\fR
+.RS 4
+Indicate a Latch operation id. <OPERATION_ALIAS> is replaced by a string to be used as the mnemotechnic name of the \fIoperation id\fR.
+.RE
+.PP
 .
 An example configuration file:
 .PP
@@ -112,6 +118,8 @@ latch_host = https://latch.elevenpaths.com
 action = open
 .br
 timeout = 8
+.br
+login = JFR...14R6
 .RE
 
 .SH EXAMPLES
@@ -119,12 +127,12 @@ timeout = 8
 .
 .
 .SH FILES
-.I /etc/latch/latch.conf
+.I /path/to/latch.conf
 .RS 4
 Default configuration file.
 .RE
 .PP
-.I /etc/latch/latch.accounts
+.I /path/to/latch.accounts
 .RS 4
 Default accounts file.
 .RE
@@ -150,4 +158,5 @@ version 2.1 of the License, or (at your option) any later version.
 .
 .
 .SH SEE ALSO
-\fBpam_latch\fR(8)
+\fBpam_latch\fR(8),
+\fBlatch_ssh_command\fR(8)

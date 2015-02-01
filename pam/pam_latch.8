@@ -6,7 +6,7 @@ pam_latch \- PAM module to protect authentication with latch
 .
 .
 .SH "SYNOPSIS"
-\fBpam_latch.so\fR config=\fICONFIG_FILE\fR accounts=\fIACCOUNTS_FILE\fR operation=\fIOPERATION_ALIAS\fR [otp=\fIyes\fR|\fIno\fR]
+\fBpam_latch.so\fR [config=\fICONFIG_FILE\fR] [accounts=\fIACCOUNTS_FILE\fR] operation=\fIOPERATION\fR [otp=\fIyes\fR|\fIno\fR]
 .
 .
 .SH "DESCRIPTION"
@@ -21,24 +21,26 @@ A helper binary,
 .PP
 \fBconfig=\fR\fB\fI/path/to/latch.conf\fR\fR
 .RS 4
-Indicate an alternative latch.conf configuration file to override the default. This can be useful when different services need different environments.
+Indicate the latch.conf configuration file to be used.
+.PP
+By default, if this option is not specified, configuration file is \fI/etc/latch/latch.conf\fR.
 .RE
 .PP
 \fBaccounts=\fR\fB\fI/path/to/latch.accounts\fR\fR
 .RS 4
-Indicate an alternative latch.accounts accounts file to override the default. This can be useful when different services need different environments.
+Indicate the latch.accounts accounts file to be used.
+.PP
+By default, if this option is not specified, accounts file is \fI/etc/latch/latch.accounts\fR.
 .RE
 .PP
-\fBoperation=\fR\fB\fIOPERATION_ALIAS\fR\fR
+\fBoperation=\fR\fB\fIOPERATION\fR\fR
 .RS 4
-The default action of this module is to not permit the user access to a service if their official password is blank\&. The
-\fBotp\fR
-argument overrides this default and allows any user with a blank password to access the service\&.
+Name to be used in the configuration file to indicate the \fIoperation id\fR. See \fBlatch\fR(8).
 .RE
 .PP
-\fBotp=\fR\fB\fIyes|no\fR\fR
+\fBotp=\fIyes\fR|\fIno\fR
 .RS 4
-Turns on or off the reading of the file specified by envfile (0 is off, 1 is on)\&. By default this option is on\&.
+Enable or disable the One-time password option (no is disabled, yes is enabled). By default this option is \fIno\fR.
 .RE
 .
 .
@@ -51,12 +53,12 @@ Only module type \fBauth\fR is provided.
 .PP
 PAM_AUTH_ERR
 .RS 4
-Latch closed.
+This value is returned when Latch is \fBclosed\fR or default action option was set to \fB"closed"\fR when connexion with Latch Servers failed.
 .RE
 .PP
 PAM_SUCCESS
 .RS 4
-Latch open.
+This value is returned when Latch is \fBopen\fR, user is not paired, there is some invalid parameter in the configuration file or default action option was set to \fB"open"\fR when connexion with Latch Servers failed.
 .RE
 .
 .
@@ -76,6 +78,23 @@ auth	required	pam_succeed_if.so user != root quiet_success
 @include common-auth
 auth	required	pam_latch.so config=/etc/latch/latch.conf accounts=/etc/latch/latch.accounts operation=login otp=yes
 auth    optional        pam_gnome_keyring.so   
+.fi
+.if n \{\
+.RE
+.\}
+.sp
+.
+.
+.SH "SSH CONFIGURATION"
+Edit sshd_config (usually in /etc or /etc/ssh) to add the following lines:
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+UsePAM yes
+ChallengeResponseAuthentication yes
+PasswordAuthentication no
 .fi
 .if n \{\
 .RE
@@ -106,4 +125,5 @@ version 2.1 of the License, or (at your option) any later version.
 .SH "SEE ALSO"
 .PP
 \fBlatch\fR(8),
-\fBpam.d\fR(5)
+\fBpam.d\fR(5),
+\fBlatch_ssh_command\fR(8)
